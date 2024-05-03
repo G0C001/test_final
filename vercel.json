@@ -5,7 +5,7 @@
         "src": "Test/wsgi.py",
         "use": "@vercel/python",
         "config": {
-            "runtime": "python3.10",
+            "runtime": "python3.10.7",
             "maxLambdaSize": "15mb"
           }
       },
