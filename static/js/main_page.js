@@ -17,7 +17,13 @@ var CAMERA = false;
 
 document.getElementById("exam_portal_page").style.display = "none"
 
+var elem = document.documentElement;
 
+function openFullscreen() {
+    elem.requestFullscreen();
+    document.getElementById("fullscreen").style.color = "blue";
+    document.getElementById('checkbox1').style.color = 'blue';
+}
 function runSpeedTest(callback) {
     var startTime, endTime;
     var download = new Image();
@@ -65,29 +71,29 @@ function requestMicrophonePermission(callback) {
       });
 }
 
+var VideoPlay = document.getElementById("videoElement");
+
 function requestCameraPermission(callback) {
     navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function(stream) {
+        .then(function(userMediaStream) {
             document.getElementById("Camera").style.color = "blue";
             document.getElementById('checkbox4').style.color = 'blue';
             CAMERA = true;
+            VideoPlay.srcObject = userMediaStream;
+            console.log("Camera access granted");
             callback();
         })
         .catch(function(err) {
             document.getElementById("Camera").style.color = "red";
             document.getElementById('checkbox4').style.color = 'red';
             CAMERA = false;
+            console.error("Camera access denied:", err);
             callback(); 
         });
 }
 
-var elem = document.documentElement;
 
-function openFullscreen() {
-    elem.requestFullscreen();
-    document.getElementById("fullscreen").style.color = "blue";
-    document.getElementById('checkbox1').style.color = 'blue';
-}
+
 var customAlert = document.getElementById("custom-alert");
 var alertMessage = document.getElementById("alert-message");
 function Givepermissions() {
@@ -108,7 +114,6 @@ function Givepermissions() {
             });
         });
     }, 3000);
-        
 }
 
 function starttest() {
