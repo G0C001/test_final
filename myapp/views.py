@@ -19,6 +19,7 @@ for i in DB_ALL_QUESTIONS:
     }
 
 all_values = list(RESULT_DB.values())
+print(all_values)
 
 
 data_received = {}
